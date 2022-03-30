@@ -423,6 +423,3 @@ game.onUpdate(function () {
         Car.destroy()
     }
 })
-forever(function () {
-    music.playMelody("G D F D E A F B ", 120)
-})
