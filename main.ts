@@ -424,5 +424,5 @@ game.onUpdate(function () {
     }
 })
 forever(function () {
-    mySprite.setStayInScreen(true)
+    music.playMelody("G D F D E A F B ", 120)
 })
