@@ -2,20 +2,25 @@ namespace SpriteKind {
     export const PressA = SpriteKind.create()
     export const Car = SpriteKind.create()
     export const Car2 = SpriteKind.create()
+    export const Car3 = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
+    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
+})
+scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, location) {
+    Car3.destroy()
+})
 sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
     timer.after(500, function () {
-        Car.vy = -20
+        Car_2.vy = -20
     })
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Valley.destroy()
     Press_A_To_Start.destroy()
 })
-scene.onOverlapTile(SpriteKind.Car2, assets.tile`myTile2`, function (sprite, location) {
-    Car.destroy()
-})
-sprites.onDestroyed(SpriteKind.Car2, function (sprite) {
+sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.setCurrentTilemap(tilemap`level4`)
     mySprite = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -35,7 +40,7 @@ sprites.onDestroyed(SpriteKind.Car2, function (sprite) {
         . . . . . e e e e e e . . . . . 
         . . . . . e e . . e e . . . . . 
         `, SpriteKind.Player)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 2))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 2))
     scene.cameraFollowSprite(mySprite)
     controller.moveSprite(mySprite)
 })
@@ -164,16 +169,183 @@ sprites.onDestroyed(SpriteKind.Car, function (sprite) {
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         `)
     tiles.setCurrentTilemap(tilemap`level1`)
-    Car = sprites.create(assets.image`Tourist`, SpriteKind.Car2)
-    scaling.scaleByPercent(Car, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
-    tiles.placeOnTile(Car, tiles.getTileLocation(0, 28))
-    scene.cameraFollowSprite(Car)
-    Car.vx = 40
+    Car_2 = sprites.create(assets.image`Tourist`, SpriteKind.Car2)
+    scaling.scaleByPercent(Car_2, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+    tiles.placeOnTile(Car_2, tiles.getTileLocation(0, 28))
+    scene.cameraFollowSprite(Car_2)
+    Car_2.vx = 40
+    animation.runImageAnimation(
+    Car_2,
+    assets.animation`Animated Tourist`,
+    100,
+    true
+    )
 })
+scene.onOverlapTile(SpriteKind.Car2, assets.tile`myTile12`, function (sprite, location) {
+    timer.throttle("Car turn", 10000000000, function () {
+        Car3 = sprites.create(img`
+            . . . . . . 8 8 c c 8 8 . . . . 
+            . . . . . 8 6 6 6 6 6 6 8 . . . 
+            . . . . 6 c 6 6 6 6 6 6 c 6 . . 
+            . . . 8 6 c 9 6 6 6 6 6 c 6 8 . 
+            . . . f 6 6 9 6 6 6 6 6 c 6 f . 
+            . . . f 6 6 9 6 6 6 6 6 6 6 f . 
+            . . . f 6 6 9 6 6 6 6 6 6 6 f . 
+            . . . f 6 c 6 9 9 6 6 6 c 6 f . 
+            . . . 8 6 c 8 c c c c 8 c 6 8 . 
+            . . . 8 6 8 c b b b b c 8 6 8 . 
+            . . . 8 6 8 b b b b b b 8 6 8 . 
+            . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+            . . . f 8 d 8 8 8 8 8 8 d 8 f . 
+            . . . f 8 6 d 8 8 8 8 d 6 8 f . 
+            . . . f f 8 8 8 8 8 8 8 8 f f . 
+            . . . . f f . . . . . . f f . . 
+            `, SpriteKind.Car3)
+        scaling.scaleByPercent(Car3, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+        timer.after(500, function () {
+            Car_2.destroy()
+            scene.cameraFollowSprite(Car3)
+            tiles.placeOnTile(Car3, tiles.getTileLocation(22, 28))
+            Car3.vx = 0
+            Car3.vy = -40
+            Car3.setImage(img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 6 6 6 6 8 . . . 
+                . . . . 6 c 6 6 6 6 6 6 c 6 . . 
+                . . . 8 6 c 9 6 6 6 6 6 c 6 8 . 
+                . . . f 6 6 9 6 6 6 6 6 c 6 f . 
+                . . . f 6 6 9 6 6 6 6 6 6 6 f . 
+                . . . f 6 6 9 6 6 6 6 6 6 6 f . 
+                . . . f 6 c 6 9 9 6 6 6 c 6 f . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . f 8 d 8 8 8 8 8 8 d 8 f . 
+                . . . f 8 6 d 8 8 8 8 d 6 8 f . 
+                . . . f f 8 8 8 8 8 8 8 8 f f . 
+                . . . . f f . . . . . . f f . . 
+                `)
+            animation.runImageAnimation(
+            Car3,
+            [img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 6 6 6 6 8 . . . 
+                . . . . 6 c 6 6 6 6 6 6 c 6 . . 
+                . . . 8 6 c 9 6 6 6 6 6 c 6 8 . 
+                . . . f 6 6 9 6 6 6 6 6 c 6 f . 
+                . . . f 6 6 9 6 6 6 6 6 6 6 f . 
+                . . . f 6 6 9 6 6 6 6 6 6 6 f . 
+                . . . c 6 c 6 9 9 6 6 6 c 6 c . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . f 8 d 8 8 8 8 8 8 d 8 f . 
+                . . . f 8 6 d 8 8 8 8 d 6 8 f . 
+                . . . f f 8 8 8 8 8 8 8 8 f f . 
+                . . . . c c . . . . . . c c . . 
+                `,img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 6 6 6 6 8 . . . 
+                . . . . 6 c 6 6 6 6 6 6 c 6 . . 
+                . . . 8 6 c 6 6 6 6 6 6 c 6 8 . 
+                . . . c 6 9 6 6 6 6 6 6 c 6 c . 
+                . . . f 6 9 6 6 6 6 6 6 6 6 f . 
+                . . . f 6 9 6 6 6 6 6 6 6 6 f . 
+                . . . f 6 c 9 9 6 6 6 6 c 6 f . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . c 8 d 8 8 8 8 8 8 d 8 c . 
+                . . . f 8 6 d 8 8 8 8 d 6 8 f . 
+                . . . f f 8 8 8 8 8 8 8 8 f f . 
+                . . . . f c . . . . . . c f . . 
+                `,img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 6 6 6 6 8 . . . 
+                . . . . 6 c 6 6 6 6 6 6 c 6 . . 
+                . . . 8 6 c 6 6 6 6 6 6 c 6 8 . 
+                . . . f 6 6 6 6 6 6 6 6 c 6 f . 
+                . . . c 9 6 6 6 6 6 6 6 6 6 c . 
+                . . . f 9 6 6 6 6 6 6 6 6 6 f . 
+                . . . f 9 c 6 6 6 6 6 6 c 6 f . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . c 8 d 8 8 8 8 8 8 d 8 c . 
+                . . . c 8 6 d 8 8 8 8 d 6 8 c . 
+                . . . f f 8 8 8 8 8 8 8 8 f f . 
+                . . . . f f . . . . . . f f . . 
+                `,img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 6 6 6 6 8 . . . 
+                . . . . 6 c 6 6 6 6 6 6 c 9 . . 
+                . . . 8 6 c 6 6 6 6 6 6 c 9 8 . 
+                . . . f 6 6 6 6 6 6 6 6 c 9 f . 
+                . . . f 6 6 6 6 6 6 6 6 6 6 f . 
+                . . . c 6 6 6 6 6 6 6 6 6 6 c . 
+                . . . f 6 c 6 6 6 6 6 6 c 6 f . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . f 8 d 8 8 8 8 8 8 d 8 f . 
+                . . . c 8 6 d 8 8 8 8 d 6 8 c . 
+                . . . c f 8 8 8 8 8 8 8 8 f c . 
+                . . . . f f . . . . . . f f . . 
+                `,img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 6 9 9 6 8 . . . 
+                . . . . 6 c 6 6 6 6 6 9 c 6 . . 
+                . . . 8 6 c 6 6 6 6 6 9 c 6 8 . 
+                . . . f 6 6 6 6 6 6 6 9 c 6 f . 
+                . . . f 6 6 6 6 6 6 6 6 6 6 f . 
+                . . . f 6 6 6 6 6 6 6 6 6 6 f . 
+                . . . c 6 c 6 6 6 6 6 6 c 6 c . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . f 8 d 8 8 8 8 8 8 d 8 f . 
+                . . . f 8 6 d 8 8 8 8 d 6 8 f . 
+                . . . c c 8 8 8 8 8 8 8 8 c c . 
+                . . . . f f . . . . . . f f . . 
+                `,img`
+                . . . . . . 8 8 c c 8 8 . . . . 
+                . . . . . 8 6 6 9 9 6 6 8 . . . 
+                . . . . 6 c 6 6 6 6 9 6 c 6 . . 
+                . . . 8 6 c 6 6 6 6 9 6 c 6 8 . 
+                . . . f 6 6 6 6 6 6 9 6 c 6 f . 
+                . . . f 6 6 6 6 6 6 6 6 6 6 f . 
+                . . . f 6 6 6 6 6 6 6 6 6 6 f . 
+                . . . c 6 c 6 6 6 6 6 6 c 6 c . 
+                . . . 8 6 c 8 c c c c 8 c 6 8 . 
+                . . . 8 6 8 c b b b b c 8 6 8 . 
+                . . . 8 6 8 b b b b b b 8 6 8 . 
+                . . . 8 8 8 8 8 8 8 8 8 8 8 8 . 
+                . . . f 8 d 8 8 8 8 8 8 d 8 f . 
+                . . . f 8 6 d 8 8 8 8 d 6 8 f . 
+                . . . f c 8 8 8 8 8 8 8 8 c f . 
+                . . . . c f . . . . . . f c . . 
+                `],
+            50,
+            true
+            )
+        })
+    })
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
+})
+let Car3: Sprite = null
 let mySprite: Sprite = null
 let Press_A_To_Start: TextSprite = null
 let Valley: TextSprite = null
-let Car: Sprite = null
+let Car_2: Sprite = null
 scene.setBackgroundImage(img`
     3333333333333333333333dddddddddddddddddfffccccccccccccccccccccccccccccccccccccc555cccccccccccccccccccccccccccccccccccccfffddd33333333333333333333333333333333333
     3333333333333333333333dddddddddddddddddfffccccccccccccccccccccccccccccccccccccc555cccccccccccccccccccccccccccccccccccccfffddd33333333333333333333333333333333333
@@ -297,9 +469,9 @@ scene.setBackgroundImage(img`
     333333333333333ddddddddddddddddddddddddfffccccccccccccccccccccccccccccccccccccc555cccccccccccccccccccccccccccccccccccccfffdddddddddd3333333333333333333333333333
     `)
 scroller.scrollBackgroundWithSpeed(0, 50)
-Car = sprites.create(assets.image`Tourist`, SpriteKind.Car)
+Car_2 = sprites.create(assets.image`Tourist`, SpriteKind.Car)
 animation.runImageAnimation(
-Car,
+Car_2,
 [img`
     . . . . . . 8 8 c c 8 8 . . . . 
     . . . . . 8 6 6 6 6 6 6 8 . . . 
@@ -406,8 +578,8 @@ Car,
 50,
 true
 )
-Car.setPosition(100, 70)
-scaling.scaleByPercent(Car, 70, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+Car_2.setPosition(100, 70)
+scaling.scaleByPercent(Car_2, 70, ScaleDirection.Uniformly, ScaleAnchor.Middle)
 Valley = textsprite.create("Valley", 0, 7)
 Valley.setMaxFontHeight(10)
 Valley.setOutline(1, 15)
@@ -419,7 +591,7 @@ Press_A_To_Start.setPosition(80, 100)
 Press_A_To_Start.setOutline(1, 15)
 Press_A_To_Start.setKind(SpriteKind.PressA)
 game.onUpdate(function () {
-    if (Car.y <= -5) {
-        Car.destroy()
+    if (Car_2.y <= -5) {
+        Car_2.destroy()
     }
 })
