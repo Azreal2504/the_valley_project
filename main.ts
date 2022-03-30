@@ -423,3 +423,6 @@ game.onUpdate(function () {
         Car.destroy()
     }
 })
+forever(function () {
+    mySprite.setStayInScreen(true)
+})
