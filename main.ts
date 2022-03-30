@@ -14,6 +14,7 @@ scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, loc
 sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
     timer.after(500, function () {
         Car_2.vy = -20
+        color.FadeToWhite.startScreenEffect(4000)
     })
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -46,6 +47,7 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
 })
 sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     scroller.scrollBackgroundWithSpeed(0, 0)
+    color.startFade(color.White, color.originalPalette, 2000)
     scene.setBackgroundImage(img`
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
@@ -334,6 +336,12 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`myTile12`, function (sprite, lo
             50,
             true
             )
+        })
+        timer.after(2000, function () {
+            color.FadeToBlack.startScreenEffect(500)
+            timer.after(1000, function () {
+                color.startFade(color.Black, color.originalPalette, 1000)
+            })
         })
     })
 })
