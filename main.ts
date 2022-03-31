@@ -4,7 +4,7 @@ namespace SpriteKind {
     export const Car2 = SpriteKind.create()
     export const Car3 = SpriteKind.create()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level1`))
     tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
 })
@@ -17,9 +17,17 @@ sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
         color.FadeToWhite.startScreenEffect(4000)
     })
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Right`, function (sprite, location) {
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Valley.destroy()
     Press_A_To_Start.destroy()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Left`, function (sprite, location) {
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
 })
 sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.setCurrentTilemap(tilemap`level4`)
@@ -44,6 +52,10 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 2))
     scene.cameraFollowSprite(mySprite)
     controller.moveSprite(mySprite)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (sprite, location) {
+    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
 })
 sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     scroller.scrollBackgroundWithSpeed(0, 0)
@@ -183,7 +195,7 @@ sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     true
     )
 })
-scene.onOverlapTile(SpriteKind.Car2, assets.tile`myTile12`, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, location) {
     timer.throttle("Car turn", 10000000000, function () {
         Car3 = sprites.create(img`
             . . . . . . 8 8 c c 8 8 . . . . 
@@ -344,10 +356,6 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`myTile12`, function (sprite, lo
             })
         })
     })
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level4`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
 })
 let Car3: Sprite = null
 let mySprite: Sprite = null
