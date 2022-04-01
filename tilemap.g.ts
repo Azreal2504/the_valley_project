@@ -37,14 +37,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile21 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile8 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile13 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile22 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile23 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile24 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile25 = image.ofBuffer(hex``);
@@ -56,6 +48,14 @@ namespace myTiles {
     export const tile14 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile27 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile8 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile13 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile22 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile23 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -287,7 +287,7 @@ namespace myTiles {
 2..............................................................................2
 2..............................................................................2
 22222222222222222222222222222222222222222222222222222222222222222222222222222222
-`, [myTiles.transparency16,myTiles.tile1,myTiles.tile3,myTiles.tile4,myTiles.tile5,sprites.castle.tileGrass2,sprites.castle.tilePath3,sprites.castle.tilePath8,sprites.castle.tilePath7,sprites.castle.tilePath9,sprites.castle.tilePath5,sprites.castle.tileGrass1,myTiles.tile14,sprites.castle.tilePath4,sprites.castle.tilePath6,myTiles.tile9,sprites.castle.tilePath2,sprites.castle.tilePath1,sprites.castle.tileGrass3,sprites.skillmap.islandTile0,myTiles.tile17,myTiles.tile18,myTiles.tile19,myTiles.tile20,myTiles.tile21,myTiles.tile22,myTiles.tile24,myTiles.tile27,myTiles.tile8], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile1,myTiles.tile3,myTiles.tile4,myTiles.tile5,sprites.castle.tileGrass2,sprites.castle.tilePath3,sprites.castle.tilePath8,sprites.castle.tilePath7,sprites.castle.tilePath9,sprites.castle.tilePath5,sprites.castle.tileGrass1,myTiles.tile14,sprites.castle.tilePath4,sprites.castle.tilePath6,myTiles.tile9,sprites.castle.tilePath2,sprites.castle.tilePath1,sprites.castle.tileGrass3,sprites.skillmap.islandTile0,myTiles.tile17,myTiles.tile18,myTiles.tile19,myTiles.tile20,myTiles.tile21,myTiles.tile22,myTiles.tile24,myTiles.tile27,myTiles.tile8,myTiles.tile13,myTiles.tile23], TileScale.Sixteen);
         }
         return null;
     })
@@ -329,14 +329,6 @@ namespace myTiles {
             case "tile20":return tile20;
             case "myTile19":
             case "tile21":return tile21;
-            case "Indoor Left":
-            case "tile8":return tile8;
-            case "Outdoor Left":
-            case "tile13":return tile13;
-            case "Indoor Right":
-            case "tile22":return tile22;
-            case "Outdoor Right":
-            case "tile23":return tile23;
             case "myTile6":
             case "tile24":return tile24;
             case "myTile11":
@@ -349,6 +341,14 @@ namespace myTiles {
             case "tile14":return tile14;
             case "myTile12":
             case "tile27":return tile27;
+            case "Indoor Left":
+            case "tile8":return tile8;
+            case "Outdoor Left":
+            case "tile13":return tile13;
+            case "Indoor Right":
+            case "tile22":return tile22;
+            case "Outdoor Right":
+            case "tile23":return tile23;
         }
         return null;
     })

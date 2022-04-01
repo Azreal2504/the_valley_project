@@ -52,6 +52,20 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 2))
     scene.cameraFollowSprite(mySprite)
     controller.moveSprite(mySprite)
+    Hotbar = sprites.create(img`
+        1 1 1 1 1 1 1 1 1 1 1 1 1 
+        1 f f f f f f f f f f f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 f 1 
+        1 f f f f f f f f f f f 1 
+        1 1 1 1 1 1 1 1 1 1 1 1 1 
+        `, SpriteKind.Player)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level1`))
@@ -196,6 +210,7 @@ sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     )
 })
 scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, location) {
+    color.FadeToBlack.startScreenEffect(2000)
     timer.throttle("Car turn", 10000000000, function () {
         Car3 = sprites.create(img`
             . . . . . . 8 8 c c 8 8 . . . . 
@@ -349,14 +364,12 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
             true
             )
         })
-        timer.after(2000, function () {
-            color.FadeToBlack.startScreenEffect(500)
-            timer.after(1000, function () {
-                color.startFade(color.Black, color.originalPalette, 1000)
-            })
+        timer.after(3500, function () {
+            color.startFade(color.Black, color.originalPalette, 1000)
         })
     })
 })
+let Hotbar: Sprite = null
 let Car3: Sprite = null
 let mySprite: Sprite = null
 let Press_A_To_Start: TextSprite = null
@@ -610,4 +623,7 @@ game.onUpdate(function () {
     if (Car_2.y <= -5) {
         Car_2.destroy()
     }
+})
+game.onUpdate(function () {
+	
 })
