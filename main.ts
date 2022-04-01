@@ -5,8 +5,8 @@ namespace SpriteKind {
     export const Car3 = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level1`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
 })
 scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, location) {
     Car3.destroy()
@@ -18,16 +18,16 @@ sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
     })
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Right`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level4`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
+    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Valley.destroy()
     Press_A_To_Start.destroy()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Left`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level4`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
+    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
 })
 sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.setCurrentTilemap(tilemap`level4`)
@@ -54,8 +54,8 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     controller.moveSprite(mySprite)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level1`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
 })
 sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     scroller.scrollBackgroundWithSpeed(0, 0)
