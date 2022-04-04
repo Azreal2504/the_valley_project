@@ -8,6 +8,8 @@ namespace SpriteKind {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.coverAllTiles(assets.tile`Indoor Left`, assets.tile`myTile21`)
+    tiles.coverAllTiles(assets.tile`Indoor Right`, assets.tile`myTile22`)
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, location) {
@@ -21,6 +23,8 @@ sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Right`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.coverAllTiles(assets.tile`Outdoor Left`, assets.tile`myTile21`)
+    tiles.coverAllTiles(assets.tile`Outdoor Right`, assets.tile`myTile22`)
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(2, 8))
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -29,10 +33,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Left`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.coverAllTiles(assets.tile`Outdoor Left`, assets.tile`myTile21`)
+    tiles.coverAllTiles(assets.tile`Outdoor Right`, assets.tile`myTile22`)
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(2, 8))
 })
 sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.setCurrentTilemap(tilemap`level4`)
+    tiles.coverAllTiles(assets.tile`Outdoor Left`, assets.tile`myTile21`)
+    tiles.coverAllTiles(assets.tile`Outdoor Right`, assets.tile`myTile22`)
     Playable_Character = sprites.create(img`
         . . . . . . f f f f . . . . . . 
         . . . . f f f e e f f f . . . . 
@@ -76,6 +84,8 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.coverAllTiles(assets.tile`Indoor Left`, assets.tile`myTile21`)
+    tiles.coverAllTiles(assets.tile`Indoor Right`, assets.tile`myTile22`)
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 sprites.onDestroyed(SpriteKind.Car, function (sprite) {
@@ -204,6 +214,7 @@ sprites.onDestroyed(SpriteKind.Car, function (sprite) {
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         `)
     tiles.setCurrentTilemap(tilemap`level1`)
+    tiles.coverAllTiles(assets.tile`Rotater`, assets.tile`myTile1`)
     Car_2 = sprites.create(assets.image`Tourist`, SpriteKind.Car2)
     scaling.scaleByPercent(Car_2, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
     tiles.placeOnTile(Car_2, tiles.getTileLocation(0, 28))
