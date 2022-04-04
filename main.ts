@@ -10,6 +10,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (spr
     tiles.loadMap(tiles.createMap(tilemap`level1`))
     tiles.coverAllTiles(assets.tile`Indoor Left`, assets.tile`myTile21`)
     tiles.coverAllTiles(assets.tile`Indoor Right`, assets.tile`myTile22`)
+    tiles.coverAllTiles(assets.tile`Rotater`, assets.tile`myTile1`)
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, location) {
@@ -86,6 +87,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (spri
     tiles.loadMap(tiles.createMap(tilemap`level1`))
     tiles.coverAllTiles(assets.tile`Indoor Left`, assets.tile`myTile21`)
     tiles.coverAllTiles(assets.tile`Indoor Right`, assets.tile`myTile22`)
+    tiles.coverAllTiles(assets.tile`Rotater`, assets.tile`myTile1`)
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 sprites.onDestroyed(SpriteKind.Car, function (sprite) {
