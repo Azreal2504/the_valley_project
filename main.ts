@@ -3,13 +3,15 @@ namespace SpriteKind {
     export const Car = SpriteKind.create()
     export const Car2 = SpriteKind.create()
     export const Car3 = SpriteKind.create()
+    export const ToolBar = SpriteKind.create()
+    export const adjuster = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level4`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
+    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, location) {
-    Car3.destroy()
+    Car32.destroy()
 })
 sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
     timer.after(500, function () {
@@ -18,20 +20,20 @@ sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
     })
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Right`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level1`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(Playable_Character, tiles.getTileLocation(2, 8))
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Valley.destroy()
     Press_A_To_Start.destroy()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Indoor Left`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level1`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(13, 25))
+    tiles.loadMap(tiles.createMap(tilemap`level4`))
+    tiles.placeOnTile(Playable_Character, tiles.getTileLocation(2, 8))
 })
 sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
     tiles.setCurrentTilemap(tilemap`level4`)
-    mySprite = sprites.create(img`
+    Playable_Character = sprites.create(img`
         . . . . . . f f f f . . . . . . 
         . . . . f f f e e f f f . . . . 
         . . . f f f e e e e f f f . . . 
@@ -49,13 +51,32 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
         . . . . . e e e e e e . . . . . 
         . . . . . e e . . e e . . . . . 
         `, SpriteKind.Player)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(8, 2))
-    scene.cameraFollowSprite(mySprite)
-    controller.moveSprite(mySprite)
+    tiles.placeOnTile(Playable_Character, tiles.getTileLocation(8, 2))
+    scene.cameraFollowSprite(Playable_Character)
+    controller.moveSprite(Playable_Character)
+    Tool_Bar = sprites.create(img`
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+        1 f f f f f f f f f f f f f f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f f f f f f f f f f f f f f 1 
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+        `, SpriteKind.ToolBar)
+    info.changeScoreBy(1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (sprite, location) {
-    tiles.loadMap(tiles.createMap(tilemap`level4`))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 8))
+    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     scroller.scrollBackgroundWithSpeed(0, 0)
@@ -197,7 +218,7 @@ sprites.onDestroyed(SpriteKind.Car, function (sprite) {
 })
 scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, location) {
     timer.throttle("Car turn", 10000000000, function () {
-        Car3 = sprites.create(img`
+        Car32 = sprites.create(img`
             . . . . . . 8 8 c c 8 8 . . . . 
             . . . . . 8 6 6 6 6 6 6 8 . . . 
             . . . . 6 c 6 6 6 6 6 6 c 6 . . 
@@ -215,14 +236,14 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
             . . . f f 8 8 8 8 8 8 8 8 f f . 
             . . . . f f . . . . . . f f . . 
             `, SpriteKind.Car3)
-        scaling.scaleByPercent(Car3, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+        scaling.scaleByPercent(Car32, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
         timer.after(500, function () {
             Car_2.destroy()
-            scene.cameraFollowSprite(Car3)
-            tiles.placeOnTile(Car3, tiles.getTileLocation(22, 28))
-            Car3.vx = 0
-            Car3.vy = -40
-            Car3.setImage(img`
+            scene.cameraFollowSprite(Car32)
+            tiles.placeOnTile(Car32, tiles.getTileLocation(22, 28))
+            Car32.vx = 0
+            Car32.vy = -40
+            Car32.setImage(img`
                 . . . . . . 8 8 c c 8 8 . . . . 
                 . . . . . 8 6 6 6 6 6 6 8 . . . 
                 . . . . 6 c 6 6 6 6 6 6 c 6 . . 
@@ -241,7 +262,7 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
                 . . . . f f . . . . . . f f . . 
                 `)
             animation.runImageAnimation(
-            Car3,
+            Car32,
             [img`
                 . . . . . . 8 8 c c 8 8 . . . . 
                 . . . . . 8 6 6 6 6 6 6 8 . . . 
@@ -357,8 +378,9 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
         })
     })
 })
-let Car3: Sprite = null
-let mySprite: Sprite = null
+let Tool_Bar: Sprite = null
+let Car32: Sprite = null
+let Playable_Character: Sprite = null
 let Press_A_To_Start: TextSprite = null
 let Valley: TextSprite = null
 let Car_2: Sprite = null
@@ -606,6 +628,11 @@ Press_A_To_Start.setMaxFontHeight(5)
 Press_A_To_Start.setPosition(80, 100)
 Press_A_To_Start.setOutline(1, 15)
 Press_A_To_Start.setKind(SpriteKind.PressA)
+game.onUpdate(function () {
+    if (info.score() == 1) {
+        Tool_Bar.setPosition(Playable_Character.x + 50, Playable_Character.y - 50)
+    }
+})
 game.onUpdate(function () {
     if (Car_2.y <= -5) {
         Car_2.destroy()
