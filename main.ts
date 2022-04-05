@@ -15,7 +15,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (spr
     tiles.placeOnTile(Playable_Character, tiles.getTileLocation(13, 25))
 })
 scene.onOverlapTile(SpriteKind.Car3, assets.tile`myTile2`, function (sprite, location) {
-    Car32.destroy()
+    Car_3.destroy()
 })
 sprites.onDestroyed(SpriteKind.PressA, function (sprite) {
     timer.after(500, function () {
@@ -82,7 +82,8 @@ sprites.onDestroyed(SpriteKind.Car3, function (sprite) {
         1 f f f f f f f f f f f f f f 1 
         1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
         `, SpriteKind.ToolBar)
-    info.changeScoreBy(1)
+    info.changeScoreBy(600)
+    info.setLife(3)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Left`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level1`))
@@ -230,9 +231,14 @@ sprites.onDestroyed(SpriteKind.Car, function (sprite) {
     true
     )
 })
+function Clock () {
+    timer.throttle("action", 3000, function () {
+        info.changeScoreBy(1)
+    })
+}
 scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, location) {
     timer.throttle("Car turn", 10000000000, function () {
-        Car32 = sprites.create(img`
+        Car_3 = sprites.create(img`
             . . . . . . 8 8 c c 8 8 . . . . 
             . . . . . 8 6 6 6 6 6 6 8 . . . 
             . . . . 6 c 6 6 6 6 6 6 c 6 . . 
@@ -250,14 +256,14 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
             . . . f f 8 8 8 8 8 8 8 8 f f . 
             . . . . f f . . . . . . f f . . 
             `, SpriteKind.Car3)
-        scaling.scaleByPercent(Car32, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+        scaling.scaleByPercent(Car_3, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
         timer.after(500, function () {
             Car_2.destroy()
-            scene.cameraFollowSprite(Car32)
-            tiles.placeOnTile(Car32, tiles.getTileLocation(22, 28))
-            Car32.vx = 0
-            Car32.vy = -40
-            Car32.setImage(img`
+            scene.cameraFollowSprite(Car_3)
+            tiles.placeOnTile(Car_3, tiles.getTileLocation(22, 28))
+            Car_3.vx = 0
+            Car_3.vy = -40
+            Car_3.setImage(img`
                 . . . . . . 8 8 c c 8 8 . . . . 
                 . . . . . 8 6 6 6 6 6 6 8 . . . 
                 . . . . 6 c 6 6 6 6 6 6 c 6 . . 
@@ -276,7 +282,7 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
                 . . . . f f . . . . . . f f . . 
                 `)
             animation.runImageAnimation(
-            Car32,
+            Car_3,
             [img`
                 . . . . . . 8 8 c c 8 8 . . . . 
                 . . . . . 8 6 6 6 6 6 6 8 . . . 
@@ -393,7 +399,7 @@ scene.onOverlapTile(SpriteKind.Car2, assets.tile`Rotater`, function (sprite, loc
     })
 })
 let Tool_Bar: Sprite = null
-let Car32: Sprite = null
+let Car_3: Sprite = null
 let Playable_Character: Sprite = null
 let Press_A_To_Start: TextSprite = null
 let Valley: TextSprite = null
@@ -643,8 +649,8 @@ Press_A_To_Start.setPosition(80, 100)
 Press_A_To_Start.setOutline(1, 15)
 Press_A_To_Start.setKind(SpriteKind.PressA)
 game.onUpdate(function () {
-    if (info.score() == 1) {
-        Tool_Bar.setPosition(Playable_Character.x + 50, Playable_Character.y - 50)
+    if (info.score() >= 1) {
+        Tool_Bar.setPosition(scene.cameraProperty(CameraProperty.X) + 70, scene.cameraProperty(CameraProperty.Y) - -50)
     }
 })
 game.onUpdate(function () {
