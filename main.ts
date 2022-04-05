@@ -5,6 +5,7 @@ namespace SpriteKind {
     export const Car3 = SpriteKind.create()
     export const ToolBar = SpriteKind.create()
     export const adjuster = SpriteKind.create()
+    export const tile = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Outdoor Right`, function (sprite, location) {
     tiles.loadMap(tiles.createMap(tilemap`level1`))
